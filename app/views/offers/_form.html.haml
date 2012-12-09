@@ -1,0 +1,40 @@
+.b-nav
+  %a{:href => "/"} < Головна
+  %a.lpad{:href => offers_url} Пропозиції
+.b-content
+  .the-form
+    = form_for resource, :url => (resource.id ? resource_path : collection_path) do |f|
+      .f-rw
+        .f-rt Назва:
+        .f-rv= text_field :offer, :name, :value => resource.name
+      .f-rw
+        .f-rt Площі:
+        .f-rv
+          %ul#regions.filetree= render :partial => 'reference_point', :collection => Region.all, :locals => {:offer => resource}
+      .f-rw
+        .f-rt Дата:
+        .f-rv= date_select(:offer, :date)
+      .f-rw
+        .f-rt  
+        .f-rv= submit_tag 'Зберегти пропозицію'
+:css
+  .filetree span.folder{display:inline;}
+-#%script{:src => "/javascripts/admin/check.js", :type => "text/javascript"}
+:javascript
+  $(document).ready(function(){
+    $('#regions').treeview({collapsed:true});
+    $('input:checkbox.checkcity').change(function(){
+      var a = $(this).attr('alt');
+      var v = $(this).attr('checked');
+
+      if(v === 'checked'){
+        $('input:checkbox.'+a).attr('checked',v);
+      }else{
+        $('input:checkbox.'+a).removeAttr('checked');
+      }
+
+
+      return false; 
+    });
+  });
+

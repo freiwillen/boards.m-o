@@ -1,0 +1,16 @@
+= link_to 'imports list path'
+%ul
+  - resource.sheets.each do |sheet|
+    %li
+      %h3= sheet.name
+      %table
+        %tr
+          - sheet.columns.recognized.each do |column|
+            %th= column.name
+        - sheet.rows.each do |row|
+          %tr
+            - sheet.columns.recognized.each do |column|
+              %td= row.send :"cell#{column.number}"
+- unless resource.applied?
+  = form_tag apply_import_path(resource), :method => :put do
+    = submit_tag 'apply'

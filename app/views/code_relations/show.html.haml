@@ -1,0 +1,10 @@
+Внутрішній код: #{@code_relation.code}
+%br
+  Зовнішній код: #{@code_relation.foreign_code}
+  = link_to('Борд', show_board_path(@code_relation.code)) if @code_relation.board
+  %br
+    %br
+      = link_to 'Редагувати', edit_code_relation_path(@code_relation)
+      |
+      \#{link_to 'Список співвідношень кодів', code_relations_path}
+

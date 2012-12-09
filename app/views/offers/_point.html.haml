@@ -1,0 +1,9 @@
+- point.boards.each do |board|
+  %li
+    = check_box_tag "boards[#{board.id}]", true, (offer.boards.include?(board) ? true : false), :class=> "city_#{board.point.reference_point_id}"
+    %label{:for => "boards_#{board.id}"}
+      = board.code
+      — #{board.point.address if board.point}
+    -#%a{:href => board_by_code_path(board.code), :target => "_blank"} ...
+    = link_to '...', board_by_code_path(board.code), :target => '_blank'
+

@@ -1,0 +1,25 @@
+.b-content
+  %div
+    %span.a0i= resource.name
+    = link_to 'ред.', edit_resource_path, :class => 'lpad'
+    = link_to 'x', resource_path, :method => :delete, :class => 'lpad'
+  %a{:href => export_offer_path(resource)} Export to excel
+  %ol.a0j
+    - resource.boards.each do |board|
+      %li
+        = link_to board.code, board_by_code_path(board.code)
+        %span.a0k= board.point.address if board.point
+#map.b-right
+:javascript
+  $(document).ready(function(){
+    boards = [
+      #{
+        resource.boards.select{|b| !b.coords.blank? }.
+        collect{|b| board_json b }.
+        join(", ")
+      }
+    ];
+    make_map();
+    goto_boards();
+  });
+

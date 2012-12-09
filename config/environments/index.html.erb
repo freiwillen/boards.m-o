@@ -1,0 +1,23 @@
+<% Category.rebuild!%>
+<%content_for :page_title do%><%='Меблевий центр «Дім»'%><%end%>
+<style>#content,#tsh{margin-top:0;}</style>
+  <ul id="catalogue">
+    <% @catalogue.sort{|a,b| a.position <=> b.position}.each_with_index do |cat, index| %>
+      <%= render :partial => "cat#{cat.levels}", :object => cat%>
+    <% end %>
+    <li>
+      <h2><%= link_to @other.name, other_path %></h2>
+      <div class="ill"><%=raw @other.illustration%></div>
+    </li>
+    <li>
+      <h2><%= link_to 'Розпродаж', sale_path %></h2>
+      <div class="ill"><img src="/images/sale.jpg" alt="Розпродаж" style="position:relative;top:-30px;" /></div>
+    </li>
+    <li>
+      <h2><%= link_to 'Меблі на замовлення', design_studios_path %></h2>
+      <div class="ill"><img src="/images/ordered2.jpg" alt="Меблі на замовлення" style="position:relative;top:-30px;" /></div>
+    </li>
+  </ul>
+  
+<div id="warn" class="note"><img src="/images/finger.png" />На&nbsp;сайті представлені взірці меблів, які в&nbsp;даний час знаходяться на&nbsp;експозиції у&nbsp;магазині.<br>Обрану вами модель можна замовити в&nbsp;іншому виконанні оббивки та&nbsp;кольору декору.<br>Більше моделей ви&nbsp;можете підібрати за&nbsp;каталогами виробників.
+</div>

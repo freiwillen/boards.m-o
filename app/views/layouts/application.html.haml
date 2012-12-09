@@ -1,0 +1,33 @@
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "billboards", :name => "description"}/
+    %title Maximus outdoor
+    %link{:href => "/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    = stylesheet_link_tag 'application'
+    = csrf_meta_tags 
+    %script{:src => "http://api-maps.yandex.ru/1.1/index.xml?key=#{ymaps_key}", :type => "text/javascript"}
+  %body
+    .a00
+      .logo
+        %a{:href => "/"}
+          %img{:src => "/images/logo.png", :style => 'padding-left:32px'}/
+    = yield 
+    -#.a01
+      ќфис:
+      %b reklama@kffa.info
+      = succeed "\u{41c}\u{430}\u{440}\u{44c}\u{44f}\u{43d}\u{430}" do
+        %br/
+      Ўкромида:
+      %b mari@kffa.info
+      = succeed "\u{418}\u{440}\u{438}\u{43d}\u{430}" do
+        %br/
+      √ладенька:
+      %b ira@kffa.info
+      = succeed "\u{424}\u{43e}\u{442}\u{43e}-\u{43e}\u{442}\u{447}\u{435}\u{442}\u{44b}:" do
+        %br/
+      %b foto@kffa.info
+      %br/
+
+    = javascript_include_tag "#{controller_name}_j_#{action_name}"
+    = yield :javascripts

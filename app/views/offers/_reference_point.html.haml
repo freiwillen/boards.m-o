@@ -1,0 +1,16 @@
+%li{:alt => reference_point.coords}
+  - if reference_point.type=='ReferencePoint'
+    %span= reference_point.name
+    .a0l= reference_point.address
+  - else
+    - if reference_point.type=='City'
+      %i.a0m
+        %input.checkcity{:alt => "city_#{reference_point.id}", :id => "city_#{reference_point.id}", :type => "checkbox"}/
+    %span.folder
+      %b= reference_point.name
+    - if reference_point.points.any?
+      %ul= render :partial => 'point', :collection => reference_point.points, :locals => {:offer => offer}
+  - if reference_point.type=='Region'
+    - if reference_point.cities.any?
+      %ul= render :partial => 'reference_point', :collection => reference_point.cities, :locals => {:offer => offer}
+

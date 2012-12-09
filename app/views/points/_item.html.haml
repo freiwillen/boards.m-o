@@ -1,0 +1,8 @@
+%li
+  %span{:alt => "p#{item.id}"}
+    = item.address
+
+    = link_to 'edit', edit_point_path(item), :class => 'lpad', :target => '_blank'
+    = link_to 'x', point_path(item), :class => 'lpad', :method => :delete
+    - if item.respond_to? :boards
+      .a0e=raw links_to_edit_boards(item)

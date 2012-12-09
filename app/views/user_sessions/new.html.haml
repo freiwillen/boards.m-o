@@ -1,0 +1,16 @@
+.login_form_container
+  %h1 Вхід
+  .login_form{:align => 'center'}
+    = form_for @user_session, :url => user_session_path do |f|
+      %table
+        %tr
+          %td.label= f.label :login, 'Логін'
+          %td= f.text_field :login
+        %tr
+          %td.label= f.label :password, 'Пароль'
+          %td= f.password_field :password
+        %tr
+          %td.label= f.label :remember_me, "Запам'ятати мене"
+          %td= f.check_box :remember_me
+        %tr
+          %td.submit{:colspan => 2}= f.submit "Зайти"

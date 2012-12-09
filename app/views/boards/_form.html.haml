@@ -1,0 +1,50 @@
+.b-nav
+  = link_to  '/', root_path
+  = link_to 'Points', points_path, :class => 'lpad'
+  = link_to @board.point.address, edit_point_path(parent), :class => 'lpad'
+.a0f
+  .the-form
+    = form_for [parent, @board] do |f|
+      .f-rw
+        .f-rt code:
+        .f-rv= f.text_field :code, :style=>'width:64px;'
+      .f-rw
+        .f-rt direction:
+        .f-rv= f.text_field :direction
+      .f-rw
+        .f-rt construction type:
+        .f-rv= f.select :construction_type, Board.construction_types
+      .f-rw
+        .f-rt size:
+        .f-rv= f.select :size, Board.sizes
+      .f-rw
+        .f-rt side:
+        .f-rv= f.select :side, Board.sides
+      .f-rw
+        .f-rt foto:
+        .f-rv= f.file_field :photo
+      .f-rw
+        .f-rt price:
+        .f-rv= f.text_field :price, :style=>'width:64px;'
+      .f-rw
+        .f-rt states:
+        .f-rv
+          #states
+            - if @board.id
+              - @board.nearest_states.each do |state|
+                .b-fst
+                  = select_tag 'state['+state.date.month.to_s+'-'+state.date.year.to_s+']', state_select_options, :style=>'width:64px;'
+                  %b= state.date.strftime('%m.%y')
+            - else
+              - m_start = Date.new(Date.today.year, Date.today.month, 1)
+              - m_start.step(m_start+(6-1).months,1.months) do |date|
+                .b-fst
+                  = select_tag 'state['+date.month.to_s+'-'+date.year.to_s+']', state_select_options, :style=>'width:64px;'
+                  %b= date.strftime('%m.%y')
+      .f-rw
+        .f-rt
+        .f-rv= image_tag(@board.photo.url) if @board.photo.url
+      .f-rw
+        .f-rt
+        .f-rv= submit_tag 'Save'
+

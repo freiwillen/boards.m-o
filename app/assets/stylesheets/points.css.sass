@@ -1,0 +1,371 @@
+// Place all the styles related to the Points controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+html
+  margin: 0
+  padding: 0
+
+body
+  background-color: #ffffff
+  font-family: Arial,Helvetica,sans-serif
+  font-size: 12px
+  margin: 0
+  padding: 0
+  position: relative
+
+a
+  text-decoration: underline
+  color: #da604c
+  &:visited
+    text-decoration: underline
+    color: #da604c
+  &:hover
+    color: #f36100
+
+img
+  border: none
+
+table, td, th
+  padding: 0
+  margin: 0
+  border: none
+  border-collapse: collapse
+  vertical-align: top
+  text-align: left
+
+table
+  width: 100%
+  font-size: 12px
+
+form, input
+  margin: 0
+
+textarea
+  font-family: Arial,Helvetica,sans-serif
+  font-size: 12px
+
+sup, sub
+  vertical-align: middle
+  position: relative
+  font-size: 75%
+
+sup
+  bottom: 0.5em
+
+sub
+  top: 0.5em
+
+h2
+  font-weight: normal
+  font-size: 18px
+
+h4
+  font-size: 16px
+
+h5
+  font-size: 12px
+
+input
+  &[type=radio], &[type=checkbox]
+    margin: 0
+    position: relative
+    top: 3px
+    *top: 2px
+    margin-right: 3px
+
+.f-rt
+  float: left
+  width: 128px
+
+.f-rv
+  margin-left: 128px
+  padding-left: 8px
+  input[type=text], textarea
+    width: 100%
+  input[type=text]
+
+.f-rw
+  clear: both
+
+.the-form
+  border: 1px solid #a0a0a0
+  -moz-border-radius: 4px
+  -webkit-border-radius: 4px
+  display: inline-block
+  display: -moz-inline-box
+  zoom: 1
+  *display: inline
+  width: 90%
+  padding-top: 8px
+  padding-bottom: 8px
+  padding-left: 16px
+  padding-right: 16px
+
+.b-sel
+  float: left
+  margin-right: 16px
+
+#addr_search
+  width: 320px
+
+#boards
+  width: auto
+  td
+    &.code
+      font-size: 11px
+      font-weight: bold
+      text-align: left
+      white-space: nowrap
+    &.s
+      border-left: 1px solid #eeeeee
+    &.n
+      text-align: right
+      border-right: 1px solid #f9bab0
+    &.t
+      text-align: left
+      white-space: nowrap
+  .board
+    cursor: pointer
+
+.rbor
+  border-right: 1px solid #f9bab0
+  white-space: nowrap
+
+.bhl
+  background-color: #ffeae7
+  cursor: pointer
+
+.bthis
+  background-color: #f9c2b9
+
+#boards .opt
+  font-size: 11px
+
+#map
+  height: 512px
+  border: 1px solid #a0a0a0
+
+.b-line
+  overflow: hidden
+  width: 100%
+  margin-top: 16px
+
+.b-left
+  float: left
+  width: 640px
+  overflow: auto
+
+.b-right
+  min-width: 30%
+
+.b-content
+  float: left
+  width: 640px
+  padding-left: 48px
+  padding-right: 16px
+
+.b-nav
+  margin-left: 32px
+  margin-bottom: 32px
+
+.lpad
+  margin-left: 32px
+
+.b-img
+  border: 1px solid #a0a0a0
+
+.b-board h2
+  margin-top: 0
+  margin-bottom: 8px
+  font-size: 16px
+  font-weight: bold
+
+.b-photo
+  width: 450px
+  background: url(/images/loader.gif) repeat
+
+.logo
+  float: left
+  width: 176px
+  height: 64px
+  padding-right: 20px
+  a
+    display: block
+
+.a00
+  height: 96px
+  *height: 128px
+  padding-top: 32px
+  margin-right: 32px
+  z-index: 3
+  min-width: 1032px
+
+.a01
+  padding-top: 16px
+  text-align: center
+  clear: both
+  width: 100%
+  padding-bottom: 16px
+
+.b-admin
+  margin-left: 32px
+  margin-right: 32px
+  overflow: hidden
+  padding-top: 16px
+  padding-bottom: 16px
+  border-bottom: 1px solid #a0a0a0
+  span
+    float: left
+
+.a02
+  padding-left: 32px
+  padding-right: 32px
+  min-width: 960px
+
+.a03
+  float: right
+  margin-left: 48px
+
+.a04
+  margin-bottom: 16px
+
+.a05
+  font-size: 18px
+
+.a06
+  margin-top: 16px
+  margin-bottom: 16px
+
+.a07
+  width: 64px
+  text-align: center
+  font-size: 11px
+
+.a08
+  border-top: 1px solid #a0a0a0
+  text-align: center
+
+.a09
+  width: 480px
+  border: 1px solid #da604c
+
+.ac_results
+  padding: 0
+  border: 1px solid #a0a0a0
+  overflow: hidden
+  z-index: 9999
+  ul
+    width: 100%
+    background-color: #ffffff
+    padding: 0
+    margin: 0
+  li
+    margin: 0
+    padding-left: 3px
+    padding-right: 3px
+    padding-top: 2px
+    padding-bottom: 2px
+    line-height: 16px
+    display: block
+    overflow: hidden
+    cursor: pointer
+  strong
+    color: #da604c
+
+.ac_loading
+  background: white url('/images/indicator.gif') right center no-repeat
+  border: 2px solid #da604c
+
+.ac_odd
+
+.ac_over
+  color: #000000
+  background-color: #fcdad4
+
+.a0a
+  font-size: 18px
+
+#regions
+  float: left
+  width: 640px
+  padding-left: 48px
+  padding-right: 16px
+
+.a0b
+  font-size: 11px
+  font-family: Verdana,Geneva,sans-serif
+  font-weight: bold
+
+.a0c
+  margin-bottom: 0
+
+.a0d
+  margin-top: 8px
+  margin-bottom: 8px
+
+.linklist
+  padding: 0
+  margin-top: 0
+  margin-bottom: 0
+  margin-left: 64px
+  li
+    margin-bottom: 8px
+
+.a0e
+  font-size: 11px
+
+.b-fst
+  white-space: nowrap
+  b
+    font-size: 11px
+    font-family: Verdana,Geneva,sans-serif
+    font-weight: normal
+    margin-left: 16px
+    position: relative
+    top: 3px
+
+.a0f
+  margin-left: 48px
+  margin-right: 32px
+
+.a0g
+  font-size: 11px
+
+.a0h
+  font-size: 11px
+  font-family: Verdana,Geneva,sans-serif
+  font-weight: bold
+
+.b-nowr
+  white-space: nowrap
+
+#b-updates
+  td
+    padding-left: 4px
+    padding-right: 4px
+    font-size: 11px
+    border-top: 1px solid #a0a0a0
+  th
+    padding-left: 4px
+    padding-right: 4px
+    font-size: 11px
+    text-align: center
+    border: 1px solid #a0a0a0
+  .b-new td
+    border-top: 1px dashed #a0a0a0
+
+.a0i
+  font-size: 18px
+
+.a0j
+  margin-top: 8px
+  margin-bottom: 8px
+
+.a0k
+  padding-left: 8px
+
+.a0l
+  font-size: 11px
+
+.a0m
+  margin-left: 8px

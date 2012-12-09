@@ -1,0 +1,31 @@
+.b-nav
+  %a{:href => "/"} < Головна
+  %a.lpad{:href => new_resource_path} Додати
+%ul#regions.filetree{:style => "margin-left:48px;"}
+  = render :partial => 'item', :collection => Region.all
+  = render :partial => 'item', :collection => ReferencePoint.untied
+#map.b-right
+:javascript
+  points = {
+    #{
+    collection.select{|p| !p.coords.blank? }.
+      collect{|p| reference_point_json(p) }.
+      join(", ")
+    }
+  };
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function(){
+      make_adminmap('#{last_point}');
+      put_marks();
+      $('ul li span[alt^=p]').click(function(){
+        var sc=$(this).attr('alt').split(',');
+        goto_board(points[$(this).attr('alt')])
+        }).mouseover(function(){
+          $(this).addClass('bhl')
+        }).mouseout(function(){
+          $(this).removeClass('bhl')
+        });
+      $('#regions').treeview({collapsed:true});
+    });
+

@@ -1,0 +1,11 @@
+.b-nav
+  %a{:href => "/"} < Головна
+  = link_to 'Додати пропозицію', new_resource_path, :class => 'lpad'
+.b-content
+  %ol
+    - collection.each do |offer|
+      %li
+        = link_to offer.name, resource_path(offer)
+        = link_to 'ред.', edit_resource_path(offer), :class => 'lpad'
+        = link_to 'x', resource_path(offer), :method => :delete, :class => 'lpad'
+

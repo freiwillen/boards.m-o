@@ -1,0 +1,69 @@
+.b-nav
+  %a{:href => "/"} < Головна
+  %a.lpad{:href => collection_path} Орієнтири
+.b-content
+  .the-form
+    = form_for resource, :as => :reference_point, :url => (resource.new_record? ? reference_points_path : reference_point_path(resource) ) do |f|
+      = f.hidden_field :coords, :id=>'coords'
+      .f-rw
+        .f-rt Назва рус.:
+        .f-rv= f.text_field :name
+      .f-rw
+        .f-rt Назва укр.:
+        .f-rv= f.text_field :name_ukr
+      .f-rw
+        .f-rt Адреса:
+        .f-rv= f.text_field :address
+      .f-rw
+        .f-rt Іконка (48?48):
+        .f-rv= f.file_field :icon
+      .f-rw
+        .f-rt  
+        .f-rv
+          = f.radio_button :tp, :region
+          %label{:for => "reference_point_tp_region"} область/місто
+          %br/
+          = f.radio_button :tp, :city
+          %label{:for => "reference_point_tp_city"} місто/район
+          %br/
+          = f.radio_button :tp, :reference_point
+          %label{:for => "reference_point_tp_reference_point"} орієнтир
+      .f-rw
+        .f-rt Належить до:
+        .f-rv
+          %span#parent_name.a0h
+            - if resource.parent_id
+              - parent=resource.parent
+              = parent.parent.name+' / ' if parent.parent_id
+              = parent.name
+          = f.hidden_field :parent_id, :id => 'parent_id'
+      %div{:style => "clear:both;"}
+        %ul#regions.filetree
+          - Region.all.each do |region|
+            %li{:class => region.id == resource.parent_id ? 'open' : 'closed'}
+              %a{:href => "javascript:set_parent_rp(#{region.id})"}= region.name
+              %ul
+                - region.cities.each do |city|
+                  %li{:class => city.id == resource.parent_id ? 'open' : 'closed'}
+                    %a{:href => "javascript:set_parent_rp(#{city.id})"}= city.name
+      .f-rw
+        .f-rt  
+        .f-rv= submit_tag 'Зберегти'
+#map.b-right
+:javascript
+  var reference_points = {
+    #{
+      Region.all.map do |region|
+        [region_json(region)] + region.cities.map{|city| city_json(city)} 
+      end.flatten.join(',')
+    }
+  }; 
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function(){
+      $('#regions').treeview({persist:'location', collapsed: true, unique:true});
+      make_adminmap('#{last_point}');
+      put_mark('coords', #{resource.coords.blank? ? '0, 0' : resource.coords});
+      setcentr(#{resource.coords.blank? ? '0,0' : resource.coords})
+    });
+

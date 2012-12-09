@@ -1,0 +1,111 @@
+- if current_user.admin?
+  .b-admin
+    %span
+      = form_for Import.new do |f|
+        Файл даних:
+        %br/
+        = f.file_field :source
+        %br/
+        -#= f.check_box :foreign
+        -#%label{:for => "foreign"} Сітка оператора
+        -#%br/
+        -#= f.date_select :date
+        %br/
+        = submit_tag 'Завантажити'
+        = link_to 'Зразок шапки для сітки імпорту', '/import_example.xls'
+    %span
+      -# if BoardUpdate.unconfirmed.any?
+        %a.lpad{:href => board_updates_url} Оновлення
+    %span
+      = link_to 'Пропозиції', offers_path, :class => 'lpad'
+    %span
+      = link_to 'Адреси', points_path, :class => 'lpad'
+    %span
+      = link_to 'Орієнтири', reference_points_path, :class => 'lpad'
+    %span
+      = link_to 'Співвідношення кодів', code_relations_path, :class => 'lpad'
+    %span
+      = link_to 'Imports', imports_path, :class => 'lpad'
+.a02
+  .b-line
+    %div
+      .b-sel
+        %div Город/область:
+        %select#region
+          - @districts.each do |district|
+            %option{:alt => district.coords, :value => district.name}= district.name
+      .b-sel
+        %div Район/город:
+        %select#city
+          - @cities.each do |citie|
+            %option{:alt => citie.coords, :region => citie.region.name, :rg => citie.region.id.to_s, :title => citie.id.to_s, :value => citie.name}= citie.name
+      .a03
+        %div Искать по адресу:
+        %input#addr_search{:autocomplete => "off", :type => "text"}/
+  .b-line{:style => "height:514px;"}
+    #map.b-right
+    .b-left{:style => "height:100%;"}
+      %ol#boards
+        - @boards.each do |board|
+          %li.a04
+            %a.a05{:href => show_board_url(board.code)}= board.code
+            %span
+              \  #{board.construction_type} 
+              %span= board.size
+            .board.t{:alt => board.coords}= board.address
+            %div
+              %b= board.price
+            %table.a06
+              %tr
+                - board.nearest_states.each do |state|
+                  %th.a07= state.date.strftime('%m.%Y')
+              %tr
+                - board.nearest_states.each do |state|
+                  %td.a08= state.state ? state.state : ' '
+            %img.a09{:src => "/#{board.code}.jpg"}/
+:javascript
+    points = {
+     #{
+      @rps.select{|p| !p.coords.blank? }.
+      collect{|p|  reference_point_json(p)}.
+      join(", ")
+      }
+    };
+
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function(){
+      var rg = $('select#region option');
+      for (var i=0;i<rg.length;i++){
+        var n = rg[i].textContent;
+        regions[n] = {};
+        regions[n].coords = rg[i].getAttribute('alt').split(',');
+      }
+      cityfilter = $('select#city option').detach();
+      for (var i=0;i<cityfilter.length;i++){
+        var n = cityfilter[i].textContent;
+        cities[n] = {};
+        cities[n].region = cityfilter[i].getAttribute('rg');
+        cities[n].id     = cityfilter[i].getAttribute('title');
+        cities[n].coords = cityfilter[i].getAttribute('alt').split(',');
+      }   
+      make_map();
+      switch_region();
+      $('select#region').change(switch_region);
+      $('select#city').change(switch_city);
+      $('#addr_search').autocomplete('#{autocomplete_points_path}',{
+        minChars:3,
+        selectFirst:true,
+        width:320,
+        max:12,
+        scrollHeight:320,
+        formatItem:function(row,pos,items,term){ return row[0]; }
+      }).result(function(event, data, formatted){
+        $('select#region').val(data[2]);
+        switch_region();
+        $('select#city').val(data[1]);
+        switch_city();
+        goto_coords(data[3]);
+      });
+    });
+

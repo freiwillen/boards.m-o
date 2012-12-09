@@ -1,0 +1,18 @@
+var b = [
+<%@points.each do |point|%>
+  <%fb = point.boards.first%>
+  <%if fb%>
+  { 
+    city: "<%=escape_javascript(point.city.name)%>",
+    region: "<%=escape_javascript(point.region.name)%>",
+    address:  "<%=escape_javascript(point.address)%>",
+    bsize: "<%=fb.size%>",
+    btype: "<%=fb.construction_type%>",
+    code: "<%=escape_javascript(point.boards.map{|b| link_to_unless_current(b.code,board_by_code_path(b.code))}.join(',')).html_safe%>",
+    coords: [<%=point.coords%>],
+    multi: 1
+
+  },
+  <%end%>
+<%end%>
+]

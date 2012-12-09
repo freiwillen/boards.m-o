@@ -1,0 +1,16 @@
+%li{:alt => item.coords}
+  - if item.type == 'ReferencePoint'
+    %span= item.name
+    = link_to 'ред.', edit_resource_path(item), :target => "_blank", :class => 'lpad'
+    = link_to 'x', resource_path(item), :method => :delete, :class => 'lpad'
+    .a0g= item.address
+  - else
+    %span.folder
+      %b= item.name
+      = link_to 'ред.', edit_resource_path(item), :target => "_blank", :class => 'lpad'
+    - if item.reference_points.any?
+      %ul= render :partial => 'item', :collection => item.reference_points
+  - if item.type == 'Region'
+    - if item.cities.any?
+      %ul= render :partial => 'item', :collection => item.cities
+

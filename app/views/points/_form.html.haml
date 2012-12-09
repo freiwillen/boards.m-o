@@ -1,0 +1,70 @@
+.b-nav
+  %a{:href => "/"} < Головна
+  %a.lpad{:href => points_url} Адреси
+.b-content
+  %h2= resource.address
+  .the-form
+    = form_for resource  do |f|
+      = hidden_field(:point, :coords, :id=>'coords', :value => resource.coords)
+      .f-rw
+        .f-rt Адреса:
+        .f-rv= f.text_field :address
+      .f-rw
+        .f-rt Належить до:
+        .f-rv
+          %span#parent_name.a0b
+            - if resource.reference_point_id
+              - rp=resource.reference_point
+              = rp.parent.name+' / ' if rp.parent_id
+              = rp.name
+          = f.hidden_field :reference_point_id, :id => 'parent_id'
+      %div{:style => "clear:both;"}
+        %ul#regions.filetree
+          - Region.all.each do |region|
+            %li{:class => region.id == resource.reference_point_id ? 'open' : 'closed'}
+              %a{:href => "javascript:set_parent_rp(#{region.id})"}= region.name
+              %ul
+                - region.cities.each do |city|
+                  %li{:class => city.id == resource.reference_point_id ? 'open' : 'closed'}
+                    %a{:href => "javascript:set_parent_rp(#{city.id})"}= city.name
+      .f-rw
+        .f-rt  
+        .f-rv= submit_tag 'Зберегти'
+  - if resource.id
+    %h5.a0c Площини:
+    %ol.a0d
+      - resource.boards.each do |board|
+        %li
+          -#%a{:href => board_path(board.code)}= board.code
+          — #{board.construction_type} #{board.size} #{board.code}
+          %a.lpad{:href => edit_point_board_path(resource.id,board.id)} ред.
+          = link_to 'x', point_board_path(resource.id,board.id), :method => :delete, :class => 'lpad'
+          -#%a.lpad{:href => point_board_path(resource.id,board.id)} ?
+    %a{:href => new_point_board_path(resource.id)} Додати
+#map.b-right
+:javascript
+  var reference_points = { 
+    #{
+    Region.all.map do |region| 
+      [region_json(region)] + 
+      region.cities.map{|city| city_json(city)} 
+    end.flatten.join(',') 
+    }
+  }; 
+  
+- content_for :javascripts do 
+  :javascript
+    var points = {#{
+      (ReferencePoint.all - District.all).select{|p| !p.coords.blank? }.
+        collect{|p| reference_point_json(p) }.
+        join(", ")
+      }
+    };
+        
+    $(document).ready(function(){
+      $('#regions').treeview({collapsed:true});
+      make_adminmap('#{last_point}');
+      put_mark('coords',#{resource.coords.blank? ? '0, 0' : resource.coords });
+      put_marks();
+    });
+

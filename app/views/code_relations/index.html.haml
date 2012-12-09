@@ -1,0 +1,21 @@
+%h1 Список відношень кодів
+%table
+  %tr
+    %td Внутрішній код
+    %td Зовнішній код
+    %td{:colspan => "3"} Дії
+  - @code_relations.each do |relation|
+    %tr
+      %td= relation.code
+      %td= relation.foreign_code
+      %td= link_to 'Подивитись', relation
+      %td= link_to 'Редагувати', edit_code_relation_path(relation)
+      %td= link_to 'x', relation, :confirm => 'Ви впевнені?', :method => :delete
+%br/
+= form_tag import_code_relations_path, :multipart => true do
+  %b В першій колонці власні коди, в другій — зовнішні.
+  %br
+    = file_field_tag :relations
+    = submit_tag 'Імпортувати'
+= link_to 'Нове відношення', new_code_relation_path
+

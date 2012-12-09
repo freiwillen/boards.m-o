@@ -1,0 +1,12 @@
+%h1 New code_relation
+= form_for(@code_relation) do |f|
+  %p
+    = f.label :code, "внутрішній код"
+    = f.text_field :code
+  %p
+    = f.label :foreign_code, 'зовнішній код'
+    = f.text_field :foreign_code
+  %p
+    = f.submit 'Create'
+= link_to 'Back', code_relations_path
+

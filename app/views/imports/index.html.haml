@@ -1,0 +1,13 @@
+%table
+  %tr
+    %th created_at
+    %th source
+    %th show
+    %th applied
+  - collection.each do |import|
+    %tr
+      %td= import.created_at.strftime('%d.%m.%Y')
+      %td= link_to 'source', import.source.url
+      %td= link_to 'show', resource_path(import)
+      %td= import.applied? ? '+' : '-'
+
