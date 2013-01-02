@@ -14,33 +14,34 @@
   - board=@board
   %img.b-img{:src => @board.photo.url, :style => "width:640px;"}/
 #map.b-right
-:javascript
-  $(document).ready(function(){
-    points = {
-      #{
-        @board.point.nearest_reference_points.select{|p| !p.coords.blank? }.
-        #collect{|p|  "'p#{p.id}':{coords:new Array(#{p.coords}),name:'#{p.name.gsub("'","’")}', icon:'#{(p.icon.blank? ? '' : '/'+p.icon.url)}'}" }.
-        collect{|p|  reference_point_json p}.
-        join(", ")
-      }
-    }; 
-    boards = [{
-      coords:[#{@board.coords}],
-      code:'#{@board.code}',
-      address:'#{@board.address.gsub("'","’")}',
-      btype:'#{@board.construction_type}',
-      bsize:'#{@board.size}',
-      city:'#{@board.point.city.name}',
-      region:'#{@board.point.region.name}'
-      },
-      #{
-      @board.point.neighbours.map do |n| 
-        point_with_boards_json n
-      end.join(',')  
-      }
-    ]; 
-      /*board_groups['@board.point.city.name+'/'+@board.point.region.name'] = 1; board_groups['сосед'] = 1;*/ 
-    make_map();
-    goto_board(boards[0])
-  });
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function(){
+      points = {
+        #{
+          @board.point.nearest_reference_points.select{|p| !p.coords.blank? }.
+          #collect{|p|  "'p#{p.id}':{coords:new Array(#{p.coords}),name:'#{p.name.gsub("'","’")}', icon:'#{(p.icon.blank? ? '' : '/'+p.icon.url)}'}" }.
+          collect{|p|  reference_point_json p}.
+          join(", ")
+        }
+      }; 
+      boards = [{
+        coords:[#{@board.coords}],
+        code:'#{@board.code}',
+        address:'#{@board.address.gsub("'","’")}',
+        btype:'#{@board.construction_type}',
+        bsize:'#{@board.size}',
+        city:'#{@board.point.city.name}',
+        region:'#{@board.point.region.name}'
+        },
+        #{
+        @board.point.neighbours.map do |n| 
+          point_with_boards_json n
+        end.join(',')  
+        }
+      ]; 
+        /*board_groups['@board.point.city.name+'/'+@board.point.region.name'] = 1; board_groups['сосед'] = 1;*/ 
+      make_map();
+      goto_board(boards[0])
+    });
 
