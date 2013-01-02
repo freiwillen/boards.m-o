@@ -23,7 +23,7 @@ Billboards::Application.routes.draw do
     resources :boards
   end
 
-  match 'boards/:code', :to => 'boards#by_code', :as => :board_by_code
+  match 'boards/:code', :to => 'boards#by_code', :as => :board_by_code, :constraints => {:code => /.*/}
   match 'stub', :to => 'application#stub'
   match 'logout', :to => 'user_sessions#destroy'
 
