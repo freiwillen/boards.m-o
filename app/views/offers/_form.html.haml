@@ -20,21 +20,22 @@
 :css
   .filetree span.folder{display:inline;}
 -#%script{:src => "/javascripts/admin/check.js", :type => "text/javascript"}
-:javascript
-  $(document).ready(function(){
-    $('#regions').treeview({collapsed:true});
-    $('input:checkbox.checkcity').change(function(){
-      var a = $(this).attr('alt');
-      var v = $(this).attr('checked');
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function(){
+      $('#regions').treeview({collapsed:true});
+      $('input:checkbox.checkcity').change(function(){
+        var a = $(this).attr('alt');
+        var v = $(this).attr('checked');
 
-      if(v === 'checked'){
-        $('input:checkbox.'+a).attr('checked',v);
-      }else{
-        $('input:checkbox.'+a).removeAttr('checked');
-      }
+        if(v === 'checked'){
+          $('input:checkbox.'+a).attr('checked',v);
+        }else{
+          $('input:checkbox.'+a).removeAttr('checked');
+        }
 
 
-      return false; 
+        return false; 
+      });
     });
-  });
 
