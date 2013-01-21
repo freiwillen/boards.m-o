@@ -1,4 +1,5 @@
 class BoardsController < InheritedResources::Base
+  skip_before_filter :require_user, :only => :by_code
   skip_before_filter :require_admin, :only => :by_code
   belongs_to :point
 
