@@ -39,6 +39,7 @@ namespace :deploy do
     #run "ln -nfs #{shared_path}/config/setup_load_paths.rb #{release_path}/config/setup_load_paths.rb"
     run "cp #{shared_path}/config/.rvmrc #{release_path}/.rvmrc"
     run "ln -nfs #{shared_path}/system #{release_path}/public/system"
+    run "mkdir #{release_path}/tmp/offers"
   end
 
 end
