@@ -7,11 +7,11 @@ class Board < ActiveRecord::Base
   has_attached_file :photo
   
   def self.sizes
-    %w{6x3 3x4 3x6 3х5 3х7 4x3 4x4 }
+    %w{6x3 3x4 3x6 3х5 3х7 4x3 4x4 1,2х1,8 інший}
   end
   
   def self.construction_types
-    %w{щит призма беклайт}
+    %w{щит призма беклайт сіті-лайт}
   end
   
   def self.sides

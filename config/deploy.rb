@@ -31,7 +31,7 @@ namespace :deploy do
  task :stop do ; end
  task :restart, :roles => :app, :except => { :no_release => true } do
    run "touch #{File.join(current_path,'tmp','restart.txt')}"
-  end
+ end
 
   desc "Symlink shared configs and folders on each release."
   task :symlink_shared do
