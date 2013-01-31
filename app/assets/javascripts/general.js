@@ -1,6 +1,6 @@
 var map, board_groups = {}, board_sizes = {}, cities = {}, regions = {};
 var this_city, this_region, boards = [], that = '', cityfilter;
-var tpl1 = '<div class="b-board"><h2><a href="/board/$[metaDataProperty.code]">$[metaDataProperty.code]</a> — <b>$[metaDataProperty.type] $[metaDataProperty.size]</b></h2><div>$[name]</div></div>'; 
+var tpl1 = '<div class="b-board"><h2><a href="/board/$[metaDataProperty.code]">$[metaDataProperty.code]</a> </h2><div>$[metaDataProperty.type] $[metaDataProperty.size]</div><div>$[name]</div></div>'; 
 var tpl2 = '<div class="b-board"><b>$[name]</b><div>$[metaDataProperty.code]</div></div>';  
 function make_templates(){   
 	YMaps.Templates.add('boards#tpl1', new YMaps.Template(tpl1));   
@@ -34,11 +34,11 @@ function goto_coords(c){
 function goto_boards(){
 	map.setCenter(boards[0].geo);map.setZoom(14)
 } 
-function goto_board(b){
+function goto_board(b, custom_zoom){
 	map.panTo(b.geo);
 	map.setCenter(b.geo);
 	b.mark.openBalloon();
-	map.setZoom(15)
+	map.setZoom((custom_zoom === undefined ? 15 : custom_zoom))
 } 
 function load_city(c){
      if(typeof(board_groups[this_city+'/'+this_region])=="undefined"){  
