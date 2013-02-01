@@ -16,6 +16,8 @@ gem 'authlogic'
 gem 'memprof'
 
 gem 'json'
+gem 'capybara'
+gem 'poltergeist'
 
 # Gems used only for assets and not required
 # in production environments by default.

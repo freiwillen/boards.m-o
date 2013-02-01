@@ -32,15 +32,40 @@ namespace :boards do
     
   end
   task :retie_photos_to_boards => :environment do
-	puts FileUtils.pwd
-	(Dir.entries('public/system/photos') - %w{. ..}).each do |entry|
-	  puts '='*20
-	  puts "id: #{entry}"
-	  path = "public/system/photos/"
-	  file_name = (Dir.entries(path + '/' + entry + '/original') - %w{. ..}).first
-	  puts "file: #{file_name}"
-	  Board.find(entry).update_attribute :photo_file_name, file_name
-	  Board.find(entry).update_attribute :photo_content_type, 'image/jpeg'
-	end
+    puts FileUtils.pwd
+    (Dir.entries('public/system/photos') - %w{. ..}).each do |entry|
+      puts '='*20
+      puts "id: #{entry}"
+      path = "public/system/photos/"
+      file_name = (Dir.entries(path + '/' + entry + '/original') - %w{. ..}).first
+      puts "file: #{file_name}"
+      Board.find(entry).update_attribute :photo_file_name, file_name
+      Board.find(entry).update_attribute :photo_content_type, 'image/jpeg'
+    end
   end
+
+  task :get_screenshots => :environment do
+    require 'capybara'
+    require 'capybara/dsl'
+    require 'capybara/poltergeist'
+    Capybara.run_server = false
+    Capybara.current_driver = :poltergeist
+    Capybara.app_host = 'http://m-o.com.ua'
+
+    module CapybaraSpider
+      class Screenshooter
+        include Capybara::DSL
+        def get_screenshot board
+          puts "visit http://m-o.com.ua/boards/#{board.code}"
+          visit "http://m-o.com.ua/boards/#{board.code}"
+          page.driver.resize(1400, 900)
+          page.driver.render("public/screenshoots/screen_#{board.code}.png")
+        end
+      end
+    end
+    Board.all.each do |board|
+      CapybaraSpider::Screenshooter.new.get_screenshot board
+    end
+  end
+
 end
