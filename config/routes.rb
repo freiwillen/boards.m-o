@@ -4,6 +4,9 @@ Billboards::Application.routes.draw do
   #root :to => "application#index"
   scope ':locale' do 
     root :to => "application#home"
+    get 'contacts' => 'application#contacts'
+    get 'team' => 'application#team'
+    get 'clients' => 'application#clients'
     resource :user_session
     resources :users
     resources :imports do
