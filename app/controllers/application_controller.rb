@@ -1,9 +1,14 @@
+#encoding: utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_user_session, :current_user, :last_point
-  before_filter :require_user, :except => [:stub]
-  before_filter :require_admin, :except => [:stub, :index]
+  before_filter :set_locale
+  before_filter :require_user, :except => [:stub, :home]
+  before_filter :require_admin, :except => [:stub, :index, :home]
+
+  def home
+  end
 
   def index
     #raise Region.getall.first.cities.inspect
@@ -103,6 +108,15 @@ protected
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
+  end
+
+  def set_locale
+   redirect_to '/ua' if params[:locale].blank?
+   I18n.locale = params[:locale]
+  end
+
+  def default_url_options options={}
+    options.merge :locale => I18n.locale
   end
 
 

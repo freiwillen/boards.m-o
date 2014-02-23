@@ -1,4 +1,10 @@
 module ApplicationHelper
+  def link_to_lang lang
+    curr_lang = (%w{ua ru} - [lang]).first
+    path = request.path.gsub(/^\/#{curr_lang}/, "/#{lang}")
+    link_to_unless_current t(lang), path
+  end
+
   def ymaps_key
     {
       '192.168.91.128' => 'AFTY2U4BAAAAo3exBgQAMeXxmi9nRjLgkdQec1q9sMCivYQAAAAAAAAAAABvWSNULhl4sFM9BhCw7amlr7SD_g==',

@@ -12,6 +12,18 @@
       .logo
         %a{:href => "/"}
           %img{:src => "/images/logo.png", :style => 'padding-left:32px'}/
+      .menu
+        .languages
+          %div= link_to_lang 'ru'
+          %div= link_to_lang 'ua'
+        %br{:style => 'clear:both'}
+        .pages
+          %div= link_to_unless_current t('contacts'), '#'
+          %div= link_to_unless_current t('team'), '#'
+          %div= link_to_unless_current t('clients'), '#'
+          %div= link_to_unless_current t('address_base'), '#'
+          %div= link_to_unless_current t('company'), '#'
+
     = yield 
     -#.a01
       ќфис:
