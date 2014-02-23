@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user, :last_point
   before_filter :set_locale
-  before_filter :require_user, :except => [:stub, :home]
-  before_filter :require_admin, :except => [:stub, :index, :home]
+  before_filter :require_user, :except => [:stub, :home, :team, :contacts, :clients]
+  before_filter :require_admin, :except => [:stub, :index, :home, :team, :contacts, :clients]
 
   def home
   end
