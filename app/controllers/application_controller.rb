@@ -79,7 +79,7 @@ protected
     unless current_user
       store_location
       flash[:notice] = "You must be logged in to access this page"
-      redirect_to stub_path
+      redirect_to new_user_session_path
       return false
     end
   end
@@ -87,7 +87,7 @@ protected
     unless current_user.admin?
       store_location
       flash[:notice] = "You must be logged in to access this page"
-      redirect_to stub_path
+      redirect_to root_path
       return false
     end
   end

@@ -7,6 +7,7 @@ Billboards::Application.routes.draw do
     get 'contacts' => 'application#contacts'
     get 'team' => 'application#team'
     get 'clients' => 'application#clients'
+    get 'base' => 'application#index'
     resource :user_session
     resources :users
     resources :imports do
