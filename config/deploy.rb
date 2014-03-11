@@ -1,6 +1,6 @@
 require 'bundler/capistrano'
 set :application, 'm-o.com.ua'
-set :repository,  "git@github.com:freiwillen/billboards.git"
+set :repository,  "git@github.com:freiwillen/boards.m-o.git"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
