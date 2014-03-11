@@ -26,15 +26,15 @@
 
     = yield 
     -#.a01
-      ����:
+      ŒÙËÒ:
       %b reklama@kffa.info
       = succeed "\u{41c}\u{430}\u{440}\u{44c}\u{44f}\u{43d}\u{430}" do
         %br/
-      ��������:
+      ÿÍÓÏË‰‡:
       %b mari@kffa.info
       = succeed "\u{418}\u{440}\u{438}\u{43d}\u{430}" do
         %br/
-      ���������:
+      √Î‡‰ÂÌ¸Í‡:
       %b ira@kffa.info
       = succeed "\u{424}\u{43e}\u{442}\u{43e}-\u{43e}\u{442}\u{447}\u{435}\u{442}\u{44b}:" do
         %br/
@@ -42,7 +42,11 @@
       %br/
 
     .footer
-      .company TOV "MAXIMUS-OUTDOOR"
+      .company
+        - if params[:locale] == 'ru'
+          ТОВ "МАКСИМУС-АУТДОР"
+        - else
+          TOV "МАКСИМУС-АУТДОР"
       .phones 38 096 935 12 00, (0342) 72 56 35
 
     = javascript_include_tag "#{controller_name}_j_#{action_name}"
