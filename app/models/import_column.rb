@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ImportColumn < ActiveRecord::Base
 
   belongs_to :import_sheet
