@@ -13,7 +13,7 @@ gem 'roo'
 gem 'fastercsv'
 gem 'therubyracer'
 gem 'authlogic'
-gem 'memprof'
+#gem 'memprof'
 
 gem 'json'
 gem 'capybara'
