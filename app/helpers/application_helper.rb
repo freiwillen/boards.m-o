@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def reference_point_json p 
-    "'o#{p.id}':{coords:new Array(#{p.coords}),name:'#{p.name.gsub("'","Õ")}', icon:'#{icon_url(p)}'}"
+    "'o#{p.id}':{coords:new Array(#{p.coords}),name:'#{p.name.gsub("'","â€™")}', icon:'#{icon_url(p)}'}"
   end
 
   def region_json p
@@ -31,14 +31,14 @@ module ApplicationHelper
   end
 
   def point_json p
-    "'p#{p.id}':{coords:new Array(#{p.coords}),name:'#{p.address.gsub("'","Õ")}'}"
+    "'p#{p.id}':{coords:new Array(#{p.coords}),name:'#{p.address.gsub("'","â€™")}'}"
   end
 
   def point_with_boards_json p
-    "{coords:[#{p.coords}],code:'#{p.boards.map do |b| link_to_unless_current(b.code, board_by_code_path(b.code)) end.join(', ')}',address:'#{p.address.gsub("'","Õ")}',btype:'6x3',multi:'1',city:'#{p.city.name}',region:'#{p.region.name}'}"
+    "{coords:[#{p.coords}],code:'#{p.boards.map do |b| link_to_unless_current(b.code, board_by_code_path(b.code)) end.join(', ')}',address:'#{p.address.gsub("'","â€™")}',btype:'6x3',multi:'1',city:'#{p.city.name}',region:'#{p.region.name}'}"
   end
 
   def board_json b
-    "{coords:new Array(#{b.coords}),code:'#{b.code}',address:'#{b.address.gsub("'","Õ")}',btype:'#{b.construction_type}',bsize:'#{b.size}'}"
+    "{coords:new Array(#{b.coords}),code:'#{b.code}',address:'#{b.address.gsub("'","â€™")}',btype:'#{b.construction_type}',bsize:'#{b.size}'}"
   end
 end
