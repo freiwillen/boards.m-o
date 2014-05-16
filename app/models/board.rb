@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Board < ActiveRecord::Base
   belongs_to :point#, :foreign_key => 'address'
   has_many :states, :class_name => 'BoardState', :order => 'date'
