@@ -1,3 +1,4 @@
+#encoding: utf-8
 #require 'roo'
 class ImportSheet < ActiveRecord::Base
   attr_accessor :sheet
