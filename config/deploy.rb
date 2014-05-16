@@ -5,9 +5,9 @@ set :repository,  "git@github.com:freiwillen/boards.m-o.git"
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-server  "m-o.com.ua", :app, :web, :db, :primary => true                          # Your HTTP server, Apache/etbbbc
+server  "146.185.180.49", :app, :web, :db, :primary => true                          # Your HTTP server, Apache/etbbbc
 
-set :user, 'freiwillen'
+set :user, 'deployer'
 set :use_sudo, false
 set :deploy_to, "/home/deployer/#{application}"
 #set :deploy_via, :remote_cache
