@@ -1,3 +1,4 @@
+#encoding: utf-8
 class BoardState < ActiveRecord::Base
   belongs_to :board
   
