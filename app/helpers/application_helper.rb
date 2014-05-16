@@ -1,3 +1,4 @@
+#encoding: utf-8
 module ApplicationHelper
   def link_to_lang lang
     curr_lang = (%w{ua ru} - [lang]).first
