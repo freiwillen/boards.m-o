@@ -1,4 +1,4 @@
-require 'bundler/capistrano'
+#require 'bundler/capistrano'
 set :application, 'm-o.com.ua'
 set :repository,  "git@github.com:freiwillen/boards.m-o.git"
 
