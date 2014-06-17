@@ -2,7 +2,7 @@ class PointsController < InheritedResources::Base
   skip_before_filter :require_admin, :only => :autocomplete
   [:create, :update].each do |action|
     define_method action do
-      super do |response|
+      super() do |response|
         response.html { redirect_to edit_resource_path }
       end
     end
