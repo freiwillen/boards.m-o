@@ -34,6 +34,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'capistrano'
   gem 'rvm-capistrano'
+  gem 'pry'
 end
 
 gem 'jquery-rails'

@@ -37,7 +37,7 @@
                   %b= state.date.strftime('%m.%y')
             - else
               - m_start = Date.new(Date.today.year, Date.today.month, 1)
-              - m_start.step(m_start+(6-1).months,1.months) do |date|
+              - m_start.step((m_start+(6-1).months), 30) do |date|
                 .b-fst
                   = select_tag 'state['+date.month.to_s+'-'+date.year.to_s+']', state_select_options, :style=>'width:64px;'
                   %b= date.strftime('%m.%y')
