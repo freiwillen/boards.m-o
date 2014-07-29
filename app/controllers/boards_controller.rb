@@ -5,7 +5,7 @@ class BoardsController < InheritedResources::Base
 
   [:create, :update, :destroy].each do |action|
     define_method action do
-      super do |response|
+      super() do |response|
         response.html { redirect_to edit_point_path(parent) }
       end
     end
