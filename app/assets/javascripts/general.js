@@ -42,7 +42,7 @@ function goto_board(b, custom_zoom){
 } 
 function load_city(c){
      if(typeof(board_groups[this_city+'/'+this_region])=="undefined"){  
-	    $.get('/reference_points/'+cities[c].id+'/filter_options',function(data){
+	    $.get('/' + locale + '/reference_points/'+cities[c].id+'/filter_options',function(data){
 	           eval(data);     
 		   make_points_from(b);     
 		   goto_city(c);   

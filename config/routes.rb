@@ -33,5 +33,6 @@ Billboards::Application.routes.draw do
     match 'about', :to => 'application#stub', :as => :stub
     match 'logout', :to => 'user_sessions#destroy'
   end
+    match 'boards/:code', :to => redirect('/ua/boards/%{code}'), :as => :board_by_code, :constraints => {:code => /.*/}
 
 end

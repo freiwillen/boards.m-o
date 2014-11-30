@@ -48,6 +48,7 @@
         - else
           TOV "МАКСИМУС-АУТДОР"
       .phones 38 096 935 12 00, (0342) 72 56 35
-
+    %script
+      = "var locale = '#{params[:locale]}';"
     = javascript_include_tag "#{controller_name}_j_#{action_name}"
     = yield :javascripts
